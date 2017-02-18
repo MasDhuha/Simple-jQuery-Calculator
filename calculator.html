@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	
+ 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' http://code.jquery.com https://code.jquery.com  https://ssl.gstatic.com gap: data: blob: filesystem: ; " />
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> 
+
+	<script src="https://code.jquery.com/jquery-2.1.4.js" integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4=" crossorigin="anonymous"></script>
+	
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+    <title>Calculator</title>
+
+</head>
+
+<body>
+	<div data-role="page" id="calculator">
+	
+		<div data-role="header">
+			<h1>Simple Calculator</h1>   
+		</div>    
+
+		<div data-role="main" class="ui-content ui-body-a">		
+
+            <div class="ui-field-contain">
+                <label for="number1">Number 1:</label>
+                <input name="number1" id="number1" type="number">
+            </div>
+            <div class="ui-field-contain">
+                <label for="number2">Number 2:</label>
+                <input name="number2" id="number2" type="number">
+            </div>
+            <div class="ui-field-contain">
+                <button id="plus" class="ui-btn ui-btn-inline ui-corner-all ui-icon-plus ui-btn-icon-left">ADD</button>
+                <button id="minus" class="ui-btn ui-btn-inline ui-corner-all ui-icon-minus ui-btn-icon-left">SUBTRACT</button>
+                <button id="multiply" class="ui-btn ui-btn-inline ui-corner-all ui-icon-delete ui-btn-icon-left">MULTIPLY</button>
+                <button id="divide" class="ui-btn ui-btn-inline ui-corner-all ui-icon-forbidden ui-btn-icon-left">DIVIDE</button>
+            </div>
+            <label id="answer"></label>
+		</div>	
+
+		<div data-role="footer">
+			<h1>Simple Calculator</h1>   
+		</div>   
+	</div>
+	
+	<script>
+        
+		$(document).on("pagebeforecreate", function () {	    
+		})
+		
+		$(document).on("pagecontainerbeforeshow", function(event, data) {  
+		})
+		
+		$(document).on("pagecreate", "#calculator", function() {
+		   $("#plus, #minus, #multiply, #divide").on("tap", function(){
+                var number1 = parseInt($("#number1").val());
+                var number2 = parseInt($("#number2").val());
+                var answer;
+               
+               if($(this).text() == "ADD"){
+                   answer = number1 + number2;
+               }
+               else if($(this).text() == "SUBTRACT"){
+                   answer = number1 - number2;
+               }
+               else if($(this).text() == "MULTIPLY"){
+                   answer = number1 * number2;
+               }
+               else if($(this).text() == "DIVIDE"){
+                   answer = number1 / number2;
+               }
+               $("#answer").text("Answer is " + answer);
+            })
+            $("#number1, #number2").on("tap", function(){
+                $("#answer").text("");
+            })
+		})   
+	</script>
+</body>
+</html>
